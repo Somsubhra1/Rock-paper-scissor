@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  user-select: none;
 }
 
 body {
@@ -87,17 +88,24 @@ header > h1 {
 #s {
   transform: rotateZ(-90deg);
 }
+#r:hover {
+  transform: rotateZ(90deg) scale(1.2);
+}
+#s:hover {
+  transform: rotateZ(-90deg) scale(1.2);
+}
 
 .choice:hover {
   cursor: pointer;
-  background: #2ecf64;
+  background: rgb(77, 109, 214);
+  transform: scale(1.2);
 }
 
-#action-message {
+/* #action-message {
   text-align: center;
   color: #fff;
   font-family: Asap, sans-serif;
   font-weight: bold;
   font-size: 20px;
   margin-top: 40px;
-}
+} */
