@@ -3,6 +3,11 @@ var computerScore = 0;
 const userSmall = 'User'.fontsize('3').sub();
 const compSmall = 'CPU'.fontsize('3').sub();
 
+var limit = parseInt(prompt('Please enter max points for which you wanna play. Default: 5', 5));
+if (!limit || limit === 0) {
+  limit = 5;
+}
+
 // Catching DOM elements
 
 const userScore_span = document.getElementById("user-score");
@@ -12,6 +17,7 @@ const result_p = document.querySelector(".result > p");
 const rock_div = document.getElementById("r");
 const paper_div = document.getElementById("p");
 const scissors_div = document.getElementById("s");
+const replay_btn = document.getElementById('replay');
 
 // adding event listeners
 
@@ -24,6 +30,8 @@ paper_div.addEventListener("click", function() {
 scissors_div.addEventListener("click", function() {
   game("s");
 });
+
+replay_btn.addEventListener('click', reset);
 
 // fetching computer choice
 
@@ -78,8 +86,8 @@ function wins(userChoice, computerChoice) {
     paper_div.style.pointerEvents = 'auto';
     scissors_div.style.pointerEvents = 'auto';
     result_p.innerHTML = "Make Your Move!!";
+    endCheck(userScore, computerScore);
   }, 900); 
-
 }
 
 // user lose
@@ -98,6 +106,7 @@ function lose(userChoice, computerChoice) {
     paper_div.style.pointerEvents = 'auto';
     scissors_div.style.pointerEvents = 'auto';
     result_p.innerHTML = 'Make Your Move!!'
+    endCheck(userScore, computerScore);
   }, 900); 
 }
 
@@ -125,4 +134,43 @@ function convertLetters(letter) {
     return "Paper";
   }
   return "Scissors";
+}
+
+function endCheck(userScore, computerScore) {
+  
+  if (userScore === limit) {
+    result_p.innerHTML = `User wins the Game by ${userScore - computerScore} point(s) :D`;
+    rock_div.style.pointerEvents = "none";
+    paper_div.style.pointerEvents = "none";
+    scissors_div.style.pointerEvents = "none";
+    rock_div.style.filter = 'grayscale(100%)';
+    paper_div.style.filter = 'grayscale(100%)';
+    scissors_div.style.filter = 'grayscale(100%)';
+    replay_btn.style.display = 'flex';
+  }
+  else if (computerScore === limit) {
+    result_p.innerHTML = `CPU wins the Game by ${computerScore - userScore} point(s) :(`;
+    rock_div.style.pointerEvents = "none";
+    paper_div.style.pointerEvents = "none";
+    scissors_div.style.pointerEvents = "none";
+    rock_div.style.filter = "grayscale(100%)";
+    paper_div.style.filter = "grayscale(100%)";
+    scissors_div.style.filter = "grayscale(100%)";
+    replay_btn.style.display = "flex";    
+  }
+}
+
+function reset() {
+  userScore = 0;
+  computerScore = 0;
+  userScore_span.innerHTML = userScore;
+  computer_span.innerHTML = computerScore;
+  result_p.innerHTML = `Make your Move!!`;
+  rock_div.style.pointerEvents = "auto";
+  paper_div.style.pointerEvents = "auto";
+  scissors_div.style.pointerEvents = "auto";
+  rock_div.style.filter = "grayscale(0%)";
+  paper_div.style.filter = "grayscale(0%)";
+  scissors_div.style.filter = "grayscale(0%)";
+  replay_btn.style.display = "none";  
 }

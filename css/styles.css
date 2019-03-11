@@ -24,6 +24,7 @@ header > h1 {
 
 .score-board {
   border: 3px solid #fff;
+  /* width: 200px; */
   width: 200px;
   margin: 20px auto;
   color: #fff;
@@ -109,3 +110,20 @@ header > h1 {
   font-size: 20px;
   margin-top: 40px;
 } */
+
+#replay {
+  padding: 5px;
+  border-radius: 4px;
+  margin: 40px auto;
+  display: none;
+  background-color: white;
+  color: black;
+  border: 2px solid #008cba;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+#replay:hover {
+  background-color: #008cba;
+  color: white;
+}
