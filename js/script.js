@@ -37,8 +37,7 @@ function getComputerChoice() {
 
 function game(userChoice) {
   const computerChoice = getComputerChoice();
-  console.log(userChoice + computerChoice);
-
+  
   switch (userChoice + computerChoice) {
     case "rs":
     case "pr":
