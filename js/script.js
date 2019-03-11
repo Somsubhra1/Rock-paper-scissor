@@ -70,10 +70,16 @@ function wins(userChoice, computerChoice) {
   userScore_span.innerHTML = userScore;
   result_p.innerHTML = `${convertLetters(userChoice)}${userSmall} beats ${convertLetters(computerChoice)}${compSmall} . You Win!! :D`
   document.getElementById(userChoice).style.borderColor = "#0f0";
+  rock_div.style.pointerEvents = "none";
+  paper_div.style.pointerEvents = 'none';
+  scissors_div.style.pointerEvents = 'none';
   setTimeout(() => {
     document.getElementById(userChoice).style.borderColor = "#fff";
+    rock_div.style.pointerEvents = "auto";
+    paper_div.style.pointerEvents = 'auto';
+    scissors_div.style.pointerEvents = 'auto';
     result_p.innerHTML = "Make Your Move!!";
-  }, 700); 
+  }, 900); 
 
 }
 
@@ -84,24 +90,34 @@ function lose(userChoice, computerChoice) {
   computer_span.innerHTML = computerScore;
   result_p.innerHTML = `${convertLetters(computerChoice)}${compSmall} beats ${convertLetters(userChoice)}${userSmall} . You Lose!! :(`
   document.getElementById(userChoice).style.borderColor = "#f00";
+  rock_div.style.pointerEvents = "none";
+  paper_div.style.pointerEvents = "none";
+  scissors_div.style.pointerEvents = "none";
   setTimeout(() => {
     document.getElementById(userChoice).style.borderColor = "#fff";
+    rock_div.style.pointerEvents = "auto";
+    paper_div.style.pointerEvents = 'auto';
+    scissors_div.style.pointerEvents = 'auto';
     result_p.innerHTML = 'Make Your Move!!'
-  }, 700); 
+  }, 900); 
 }
 
 // user draw
 
 function draw(userChoice, computerChoice) {
-  result_p.innerHTML = `${convertLetters(computerChoice)}${compSmall} equals with ${convertLetters(userChoice)}${userSmall} . It's a draw!! :|`
+  result_p.innerHTML = `${convertLetters(computerChoice)}${compSmall} equals ${convertLetters(userChoice)}${userSmall} . It's a draw!! :|`
   document.getElementById(userChoice).style.borderColor = "#8CA8A8";
+  rock_div.style.pointerEvents = "none";
+  paper_div.style.pointerEvents = "none";
+  scissors_div.style.pointerEvents = "none";
   setTimeout(() => {
     document.getElementById(userChoice).style.borderColor = "#fff";
+    rock_div.style.pointerEvents = "auto";
+    paper_div.style.pointerEvents = 'auto';
+    scissors_div.style.pointerEvents = 'auto';
     result_p.innerHTML = "Make Your Move!!";
-  }, 700); 
+  }, 900); 
 }
-
-
 
 function convertLetters(letter) {
   if (letter === "r") {
