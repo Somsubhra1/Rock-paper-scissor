@@ -73,7 +73,7 @@ function wins(userChoice, computerChoice) {
   setTimeout(() => {
     document.getElementById(userChoice).style.borderColor = "#fff";
     result_p.innerHTML = "Make Your Move!!";
-  }, 500); 
+  }, 700); 
 
 }
 
@@ -98,7 +98,7 @@ function draw(userChoice, computerChoice) {
   setTimeout(() => {
     document.getElementById(userChoice).style.borderColor = "#fff";
     result_p.innerHTML = "Make Your Move!!";
-  }, 500); 
+  }, 700); 
 }
 
 
