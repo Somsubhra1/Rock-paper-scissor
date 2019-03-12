@@ -3,10 +3,10 @@ var computerScore = 0;
 const userSmall = 'User'.fontsize('3').sub();
 const compSmall = 'CPU'.fontsize('3').sub();
 
-var limit = parseInt(prompt('Please enter max points for which you wanna play. Default: 5', 5));
-if (!limit || limit === 0) {
+// var limit = parseInt(prompt('Please enter max points for which you wanna play. Default: 5', 5));
+// if (!limit || limit === 0) {
   limit = 5;
-}
+// }
 
 // Catching DOM elements
 
@@ -18,6 +18,8 @@ const rock_div = document.getElementById("r");
 const paper_div = document.getElementById("p");
 const scissors_div = document.getElementById("s");
 const replay_btn = document.getElementById('replay');
+const userMoves_ul = document.querySelector("#userMoves > ul");
+const computerMoves_ul = document.querySelector("#cpuMoves > ul");
 
 // adding event listeners
 
@@ -75,6 +77,7 @@ function game(userChoice) {
 function wins(userChoice, computerChoice) {
   userScore++;
   userScore_span.innerHTML = userScore;
+  stackFill(userChoice, computerChoice, "u");
   result_p.innerHTML = `${convertLetters(userChoice)}${userSmall} beats ${convertLetters(computerChoice)}${compSmall} . You Win!! :D`
   document.getElementById(userChoice).style.borderColor = "#0f0";
   rock_div.style.pointerEvents = "none";
@@ -95,6 +98,7 @@ function wins(userChoice, computerChoice) {
 function lose(userChoice, computerChoice) {
   computerScore++;
   computer_span.innerHTML = computerScore;
+  stackFill(userChoice, computerChoice, "c");
   result_p.innerHTML = `${convertLetters(computerChoice)}${compSmall} beats ${convertLetters(userChoice)}${userSmall} . You Lose!! :(`
   document.getElementById(userChoice).style.borderColor = "#f00";
   rock_div.style.pointerEvents = "none";
@@ -113,7 +117,8 @@ function lose(userChoice, computerChoice) {
 // user draw
 
 function draw(userChoice, computerChoice) {
-  result_p.innerHTML = `${convertLetters(computerChoice)}${compSmall} equals ${convertLetters(userChoice)}${userSmall} . It's a draw!! :|`
+  result_p.innerHTML = `${convertLetters(computerChoice)}${compSmall} equals ${convertLetters(userChoice)}${userSmall} . It's a draw!! :|`;
+  stackFill(userChoice, computerChoice);
   document.getElementById(userChoice).style.borderColor = "#8CA8A8";
   rock_div.style.pointerEvents = "none";
   paper_div.style.pointerEvents = "none";
@@ -173,4 +178,21 @@ function reset() {
   paper_div.style.filter = "grayscale(0%)";
   scissors_div.style.filter = "grayscale(0%)";
   replay_btn.style.display = "none";  
+  userMoves_ul.innerHTML = "";
+  computerMoves_ul.innerHTML = "";
+}
+
+function stackFill(userChoice, computerChoice, winner) {
+  if (winner === "u") {
+    userMoves_ul.innerHTML = `<li style="color: #0f0;">${convertLetters(userChoice)}</li>` + userMoves_ul.innerHTML;
+    computerMoves_ul.innerHTML = `<li>${convertLetters(computerChoice)}</li>` + computerMoves_ul.innerHTML;
+    return;
+  }
+  else if(winner === "c"){
+    userMoves_ul.innerHTML = `<li>${convertLetters(userChoice)}</li>` + userMoves_ul.innerHTML;
+    computerMoves_ul.innerHTML = `<li style="color: #0f0;">${convertLetters(computerChoice)}</li>` + computerMoves_ul.innerHTML;
+    return;
+  }
+  userMoves_ul.innerHTML = `<li>${convertLetters(userChoice)}</li>` + userMoves_ul.innerHTML;
+  computerMoves_ul.innerHTML = `<li>${convertLetters(computerChoice)}</li>` + computerMoves_ul.innerHTML;
 }

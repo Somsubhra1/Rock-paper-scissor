@@ -13,7 +13,8 @@ body {
 
 header {
   background-color: #fff;
-  padding: 20px;
+  font-family: Asap, sans-serif;
+  padding: 10px;
 }
 
 header > h1 {
@@ -26,7 +27,8 @@ header > h1 {
   border: 3px solid #fff;
   /* width: 200px; */
   width: 200px;
-  margin: 20px auto;
+  margin: 60px auto;
+  margin-bottom: 40px;
   color: #fff;
   font-size: 46px;
   border-radius: 4px;
@@ -126,4 +128,17 @@ header > h1 {
 #replay:hover {
   background-color: #008cba;
   color: white;
+}
+
+.moves > ul, h1 {
+  font-family: Asap, sans-serif;
+  margin: 40px;
+  color: #fff;
+  text-align: center;
+}
+
+.moves > ul > li {
+  margin: 5px;
+  list-style-type: none;
+  font-family: Asap, sans-serif;
 }
