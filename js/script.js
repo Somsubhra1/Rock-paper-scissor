@@ -3,10 +3,10 @@ var computerScore = 0;
 const userSmall = 'User'.fontsize('3').sub();
 const compSmall = 'CPU'.fontsize('3').sub();
 
-// var limit = parseInt(prompt('Please enter max points for which you wanna play. Default: 5', 5));
-// if (!limit || limit === 0) {
+var limit = parseInt(prompt('Please enter max points for which you wanna play. Default: 5', 5));
+if (!limit || limit === 0) {
   limit = 5;
-// }
+}
 
 // Catching DOM elements
 
