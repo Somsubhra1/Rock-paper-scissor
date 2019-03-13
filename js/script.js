@@ -1,12 +1,8 @@
 var userScore = 0;
 var computerScore = 0;
+var limit = 5;
 const userSmall = 'User'.fontsize('3').sub();
 const compSmall = 'CPU'.fontsize('3').sub();
-
-var limit = parseInt(prompt('Please enter max points for which you wanna play. Default: 5', 5));
-if (!limit || limit === 0) {
-  limit = 5;
-}
 
 // Catching DOM elements
 
@@ -20,6 +16,8 @@ const scissors_div = document.getElementById("s");
 const replay_btn = document.getElementById('replay');
 const userMoves_ul = document.querySelector("#userMoves > ul");
 const computerMoves_ul = document.querySelector("#cpuMoves > ul");
+const modal_btn = document.getElementById('modalbtn');
+const pts_input = document.getElementById('ptslimit');
 
 // adding event listeners
 
@@ -32,7 +30,7 @@ paper_div.addEventListener("click", function() {
 scissors_div.addEventListener("click", function() {
   game("s");
 });
-
+modal_btn.addEventListener('click', limitCheck);
 replay_btn.addEventListener('click', reset);
 
 // fetching computer choice
@@ -141,10 +139,12 @@ function convertLetters(letter) {
   return "Scissors";
 }
 
+// game end check
+
 function endCheck(userScore, computerScore) {
   
   if (userScore === limit) {
-    result_p.innerHTML = `User wins the Game by ${userScore - computerScore} point(s) :D`;
+    result_p.innerHTML = `You win the Game by ${userScore - computerScore} point(s) :D`;
     rock_div.style.pointerEvents = "none";
     paper_div.style.pointerEvents = "none";
     scissors_div.style.pointerEvents = "none";
@@ -165,6 +165,8 @@ function endCheck(userScore, computerScore) {
   }
 }
 
+// game reset on play again btn click
+
 function reset() {
   userScore = 0;
   computerScore = 0;
@@ -182,6 +184,8 @@ function reset() {
   computerMoves_ul.innerHTML = "";
 }
 
+// filling moves stack
+
 function stackFill(userChoice, computerChoice, winner) {
   if (winner === "u") {
     userMoves_ul.innerHTML = `<li style="color: #0f0;">${convertLetters(userChoice)}</li>` + userMoves_ul.innerHTML;
@@ -195,4 +199,16 @@ function stackFill(userChoice, computerChoice, winner) {
   }
   userMoves_ul.innerHTML = `<li>${convertLetters(userChoice)}</li>` + userMoves_ul.innerHTML;
   computerMoves_ul.innerHTML = `<li>${convertLetters(computerChoice)}</li>` + computerMoves_ul.innerHTML;
+}
+
+// game pts limit check
+
+function limitCheck() {
+  limit = parseInt(pts_input.value);  
+  if (!limit || limit === 0 || !(Number.isInteger(limit))) {
+    limit = 5;
+  }
+  else {
+    $("#exampleModal").modal("hide");
+  }    
 }

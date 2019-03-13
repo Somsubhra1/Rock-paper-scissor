@@ -9,6 +9,7 @@
 
 body {
   background-color: #24272e;
+  overflow-x: hidden;
 }
 
 header {
@@ -42,7 +43,7 @@ header > h1 {
   background: #e2584d;
   color: #fff;
   font-size: 20px;
-  padding: 5px, 15px;
+  padding: 10px, 20px;
   font-family: Asap, sans-serif;
   padding: 2px;
   border-radius: 3px;
@@ -50,13 +51,13 @@ header > h1 {
 
 #user-label {
   position: absolute;
-  top: 30px;
+  top: 40px;
   left: -25px;
 }
 
 #computer-label {
   position: absolute;
-  top: 30px;
+  top: 40px;
   right: -25px;
 }
 
@@ -141,4 +142,13 @@ header > h1 {
   margin: 5px;
   list-style-type: none;
   font-family: Asap, sans-serif;
+}
+
+@media screen and  (max-width: 450px) {
+  header {
+    height: 150px;
+  }
+  header > h1 {
+    font-size: 30px;
+  }
 }
