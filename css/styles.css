@@ -131,6 +131,11 @@ header > h1 {
   color: white;
 }
 
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
 .moves > ul, h1 {
   font-family: Asap, sans-serif;
   margin: 40px;
