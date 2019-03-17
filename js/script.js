@@ -3,6 +3,20 @@ var computerScore = 0;
 var limit = 5;
 const userSmall = 'User'.fontsize('3').sub();
 const compSmall = 'CPU'.fontsize('3').sub();
+var games = {
+  user: 0,
+  cpu: 0,
+  total: 0,
+}
+
+// setting localStorage
+
+if (!localStorage.getItem('games')) { 
+  localStorage.setItem('games', JSON.stringify(games));
+}
+else {
+  games = JSON.parse(localStorage.getItem('games'));  
+}
 
 // Catching DOM elements
 
@@ -18,6 +32,7 @@ const userMoves_ul = document.querySelector("#userMoves > ul");
 const computerMoves_ul = document.querySelector("#cpuMoves > ul");
 const modal_btn = document.getElementById('modalbtn');
 const pts_input = document.getElementById('ptslimit');
+const games_p = document.getElementById("games");
 
 // adding event listeners
 
@@ -32,6 +47,10 @@ scissors_div.addEventListener("click", function() {
 });
 modal_btn.addEventListener('click', limitCheck);
 replay_btn.addEventListener('click', reset);
+
+// setting win %
+
+games_p.innerText = `You have won ${JSON.parse(localStorage.getItem('games')).user} out of ${JSON.parse(localStorage.getItem('games')).total} games. (Win %: ${(((JSON.parse(localStorage.getItem('games')).user) / JSON.parse(localStorage.getItem('games')).total) * 100).toFixed(2)}%)`;
 
 // fetching computer choice
 
@@ -152,6 +171,10 @@ function endCheck(userScore, computerScore) {
     paper_div.style.filter = 'grayscale(100%)';
     scissors_div.style.filter = 'grayscale(100%)';
     replay_btn.style.display = 'flex';
+    games.user++;
+    games.total++;
+    localStorage.setItem("games", JSON.stringify(games));
+    games_p.innerText = `You have won ${JSON.parse(localStorage.getItem('games')).user} out of ${JSON.parse(localStorage.getItem('games')).total} games. (Win %: ${(((JSON.parse(localStorage.getItem('games')).user) / JSON.parse(localStorage.getItem('games')).total) * 100).toFixed(2)}%)`;
   }
   else if (computerScore === limit) {
     result_p.innerHTML = `CPU wins the Game by ${computerScore - userScore} point(s) :(`;
@@ -161,7 +184,11 @@ function endCheck(userScore, computerScore) {
     rock_div.style.filter = "grayscale(100%)";
     paper_div.style.filter = "grayscale(100%)";
     scissors_div.style.filter = "grayscale(100%)";
-    replay_btn.style.display = "flex";    
+    replay_btn.style.display = "flex";
+    games.cpu++;
+    games.total++;
+    localStorage.setItem("games", JSON.stringify(games));  
+    games_p.innerText = `You have won ${JSON.parse(localStorage.getItem('games')).user} out of ${JSON.parse(localStorage.getItem('games')).total} games. (Win %: ${(((JSON.parse(localStorage.getItem('games')).user) / JSON.parse(localStorage.getItem('games')).total) * 100).toFixed(2)}%)`;
   }
 }
 
@@ -182,6 +209,7 @@ function reset() {
   replay_btn.style.display = "none";  
   userMoves_ul.innerHTML = "";
   computerMoves_ul.innerHTML = "";
+  games = JSON.parse(localStorage.getItem("games"));  
 }
 
 // filling moves stack
