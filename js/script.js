@@ -50,7 +50,9 @@ replay_btn.addEventListener('click', reset);
 
 // setting win %
 
-games_p.innerText = `You have won ${JSON.parse(localStorage.getItem('games')).user} out of ${JSON.parse(localStorage.getItem('games')).total} games. (Win %: ${(((JSON.parse(localStorage.getItem('games')).user) / JSON.parse(localStorage.getItem('games')).total) * 100).toFixed(2)}%)`;
+var winPercent = (((JSON.parse(localStorage.getItem('games')).user) / JSON.parse(localStorage.getItem('games')).total) * 100).toFixed(2);
+
+games_p.innerText = `You have won ${JSON.parse(localStorage.getItem('games')).user} out of ${JSON.parse(localStorage.getItem('games')).total} games. (Win %: ${isNaN(winPercent) ? '0': winPercent}%)`;
 
 // fetching computer choice
 
